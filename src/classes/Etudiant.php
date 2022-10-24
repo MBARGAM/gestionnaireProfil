@@ -1,7 +1,7 @@
 <?php
   
   namespace Isl\Profils\classes;
- 
+  use Faker\Factory;
   use DateTime;
  
   class Etudiant extends Personne {
@@ -14,8 +14,8 @@
     public function __construct($data){
         
         $this->coursSuivis = isset($data["coursSuivis"])?$data["coursSuivis"]:null;
-        $this->niveau =isset($data["niveau"])?$data["niveau"]:null;
-        $this->dateInscription = new DateTime($data["dateInscription"]);
+        $this->niveau =self::createNiveau();
+        $this->dateInscription = new DateTime(self::createDate());
         parent::__construct($data["infoPerso"]); // appel du constructeur de la classe data
 
     }
@@ -60,6 +60,12 @@
         return $this->statut;
 
     }
+
+    static function createNiveau(){
+        $faker = Factory::create();
+        return $faker->randomDigit();
+    }
+
 
   }
 

@@ -4,19 +4,34 @@
    use Isl\Profils\classes\Personne;
    use Isl\Profils\classes\Etudiant;
    use Isl\Profils\classes\Enseignant;
- 
- 
-   $infos = Enseignant::createPersonne(1);
-   print_q($infos);
-   $data= ["coursSuivis"=>["geo","hist"],"niveau"=>1,"dateInscription"=>"2022-10-10","statut"=>"eleve","infoPerso"=> $infos[0] ];
-   
-   $data1= ["coursSuivis"=>["geo","hist"],"dateEntree"=>"1987-10-10","infoPerso"=> $infos[0]];
+   use Isl\Profils\manager\EtudiantManager;
+   use Isl\Profils\manager\EnseignantManager;
 
-   
-   $newEnseignant= new Enseignant($data1);
+   try{
+        $nbre = 6;
+        $connexion = new PDO('mysql:host=localhost;dbname=webDev3','root','root');
+        $managerEtudiant = new EtudiantManager($connexion); //instanciation de la classe etudiant manager
+        $managerEnseignant = new EnseignantManager($connexion); //instanciation de la classe enseignant manager
+        
+      /*  for( $i = 0 ;$i< $nbre ; $i++){
 
-   $newEnseignant->setAnciennete($newEnseignant->anciennete());
+            //insertion des etudiants
+           $data =[];
+            $data= ["coursSuivis"=>Personne::createCours(2),"infoPerso"=>Personne::createPersonne()[0]];
+            $newEtudiant = new Etudiant($data);
+            $managerEtudiant->create($newEtudiant);
 
-    print_q($newEnseignant);
+            // insertion des enseignants
+            $data =[];
+            $data= ["coursDispenses"=>Personne::createCours(2),"infoPerso"=>Personne::createPersonne()[0]];
+            $newEnseignant = new Enseignant($data);
+            print_q($newEnseignant);
+            $managerEnseignant->create($newEnseignant);
+
+         } */
+    }catch(PDOException $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+    
 
 ?>

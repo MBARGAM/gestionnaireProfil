@@ -4,15 +4,15 @@
    use Faker\Factory ;
 
     class  Personne {
-    protected $id ;
-    protected $nom ;
-    protected $prenom ;
-    protected $adresse ;
-    protected $cp ;
-    protected $pays;
-    protected $societe ;
+    private  $id ;
+    private  $nom ;
+    private  $prenom ;
+    private  $adresse ;
+    private $cp ;
+    private  $pays;
+    private $societe ;
 
-    protected function __construct($data){
+    public function __construct($data){
         $this->id = isset($data["id"])?$data["id"]:null;
         $this->nom = isset($data["nom"])?$data["nom"]:null;
         $this->prenom = isset($data["prenom"])?$data["prenom"]:null;
@@ -73,33 +73,41 @@
         return $this->societe ;
     }
 
-   static function createPersonne($nbre){
+   static function createPersonne(){
 
         $faker = Factory::create();
             $tablePersonne=[];
-            for($i = 0 ; $i< $nbre ;$i++){
-                
-                $data= [];
-                $data["nom"] = $faker->lastname();
-                $data["prenom"] =$faker->firstname();
-                $data["adresse"] =$faker->address();
-                $data["cp"] =$faker->postcode();
-                $data["pays"]=$faker->country();
-                $data["societe"] =$faker->Company();
-                $tablePersonne[]=$data;
-            }
-
+        
+            $data= [];
+            $data["nom"] = $faker->lastname();
+            $data["prenom"] =$faker->firstname();
+            $data["adresse"] =$faker->address();
+            $data["cp"] =$faker->postcode();
+            $data["pays"]=$faker->country();
+            $data["societe"] =$faker->Company();
+            $tablePersonne[]=$data;
+   
          return $tablePersonne ;
 
         }
 
+        static function createDate(){
+            $faker = Factory::create();
+            return $faker->date();
+        }
 
+         //creations des cours , dispensés ou suivis par les eleves
+         static function createCours($nbre){
 
-    /*abstract function  create();
-    abstract function  read();
-    abstract function update();
-    abstract function delete();*/
- 
+            $faker = Factory::create();
+            $data= [];
+                for($i = 0 ; $i< $nbre ;$i++){
+                    $data[] = $faker->jobTitle();
+                }
+    
+             return $data ;
+    
+            }
 
 
 }

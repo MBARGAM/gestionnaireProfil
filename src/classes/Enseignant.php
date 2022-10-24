@@ -14,7 +14,8 @@
         public function __construct($data){
             
             $this->coursDispenses= isset($data["coursDispenses"])?$data["coursDispenses"]:null;
-            $this->dateEntree = new DateTime($data["dateEntree"]);
+            $this->dateEntree = new DateTime(self::CreateDate());
+            $this->anciennete = $this->anciennete(); // appel de la fonction qui calcule l anciennete 
             parent::__construct($data["infoPerso"]); // appel du constructeur de la classe data
 
         }
