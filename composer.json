@@ -1,0 +1,21 @@
+{
+    "name": "isl/profils",
+    "description": "gerer les profils etudiant et enseignant",
+    "type": "project",
+    "require": {
+        "fakerphp/faker": "^1.20"
+    },
+    "license": "0000",
+    "autoload": {
+        "psr-4": {
+            "Isl\\Profils\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "justyn",
+            "email": "marie.mbarga@isl-edu.be"
+        }
+    ],
+    "minimum-stability": "stable"
+}
