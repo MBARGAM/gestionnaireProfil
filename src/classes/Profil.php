@@ -3,7 +3,7 @@
   namespace Isl\Profils\classes;
 
   interface Profil {
-    public  function monProfil();
+    public  function allDatas($element);
   }
 
 

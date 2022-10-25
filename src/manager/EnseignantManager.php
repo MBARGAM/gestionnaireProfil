@@ -62,10 +62,38 @@
         }
 
    }
-    public  function  read(){}
+
+   public function readOne($id){
+                
+    $req =  $this->connexion 
+    ->query("SELECT elevesEnseignant.id,nom,prenom,adresse,cp,pays,societe,statut,niveau,date_entree,anciennete,date_creation
+        FROM elevesEnseignant 
+        WHERE id=".$id."   
+        ORDER BY statut,nom, prenom;" );
+
+    // execution de la requete avec un fetchall qui prend toute les donnees ,fetch ne prends que la 1 ere
+    $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+    
+public function readAll(){
+
+    $req =  $this->connexion 
+    ->query("SELECT elevesEnseignant.id,nom,prenom,adresse,cp,pays,societe,statut,niveau,date_entree,anciennete,date_creation
+        FROM elevesEnseignant 
+        ORDER BY statut ,nom, prenom;" );
+
+
+    // execution de la requete avec un fetchall qui prend toute les donnees ,fetch ne prends que la 1 ere
+    $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+        
+}
     public  function  update(){}
     public  function  delete(){}
-    public  function  monProfil(){}
+    public  function  allDatas($element){}
  
 
 

@@ -61,10 +61,70 @@ use Isl\Profils\classes\Etudiant ;
         }
               
     }
-    public  function  read(){}
-    public  function  update(){}
-    public  function  delete(){}
-    public  function  monProfil(){}
+   
+    public function readOne($id){
+                
+        $req =  $this->connexion 
+        ->query("SELECT elevesEnseignant.id,nom,prenom,adresse,cp,pays,societe,statut,niveau,date_entree,anciennete,date_creation
+            FROM elevesEnseignant 
+            WHERE id=".$id."   
+            ORDER BY statut,nom, prenom;" );
+
+        // execution de la requete avec un fetchall qui prend toute les donnees ,fetch ne prends que la 1 ere
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function readOneCours($id){
+                
+        $req =  $this->connexion 
+        ->query("SELECT nomCours FROM cours 
+            WHERE idPersonne =".$id."   
+            ORDER BY nomCours; ");
+
+            // execution de la requete avec un fetchall qui prend toute les donnees ,fetch ne prends que la 1 ere
+            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $result;
+    }
+       
+    
+    public function readAll(){
+    
+        $req =  $this->connexion 
+        ->query("SELECT elevesEnseignant.id,nom,prenom,adresse,cp,pays,societe,statut,niveau,date_entree,anciennete,date_creation
+            FROM elevesEnseignant 
+            ORDER BY statut ,nom, prenom;" );
+
+
+        // execution de la requete avec un fetchall qui prend toute les donnees ,fetch ne prends que la 1 ere
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+            
+    }
+    
+    public  function  allDatas($element){
+         $tabPersonne = [];
+        foreach($element as $value ){
+            $cours = $this->readOneCours($value["id"]);
+            $lesCours = [];
+           foreach($cours as $val){
+             $lesCours[] = $val["nomCours"];
+           }
+            $value["cours"] = $lesCours;
+            $tabPersonne[] = $value ;
+        }
+
+        return $tabPersonne;
+
+    }
+      public  function  update(){}
+      public  function  delete(){}
+     
+
+
  
 
 
